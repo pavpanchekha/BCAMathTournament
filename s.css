@@ -1,0 +1,21 @@
+body {
+	font: 12pt "Courier New";
+	width: 750px;
+}
+
+textarea {
+	font: 12pt "Courier New";
+}
+
+p {
+	border: thin dashed black;
+	padding: 5px;
+}
+
+p.dark {
+	background: #E6E6FA;
+}
+
+p.light {
+	background: #FFFAFA;
+}

@@ -7,27 +7,7 @@ if(strlen($a) != 0)
 <head>
 <title>PHP Test</title>
 <style type="text/css">
-body {
-	font: 10pt "Courier New";
-	width: 665px;
-}
-
-textarea {
-	font: 10pt "Courier New";
-}
-
-p {
-	border: thin dashed black;
-	padding: 5px;
-}
-
-p.dark {
-	background: #E6E6FA;
-}
-
-p.light {
-	background: #FFFAFA;
-}
+@import 's.css';
 </style>
 <script type="text/javascript">
 function changeBg(a) {

@@ -14,14 +14,7 @@ if(strlen($a) != 0) {
 <head>
 <title>Problem Submissions</title>
 <style type="text/css">
-body {
-	font: 12pt "Courier New";
-	width: 800px;
-}
-
-textarea {
-	font: 12pt "Courier New";
-}
+@import 's.css';
 </style>
 <script type="text/javascript">
 function changeBg(a) {
@@ -30,7 +23,7 @@ function changeBg(a) {
 </script>
 </head>
 <body>
-<h1>BCA Math Competition Problem Submissions</h1>
+<h2>BCA Math Competition Problem Submissions</h2>
 <?php
 printf("So far there are <span style=\"font-weight: 600;\">".file_get_contents("count.txt")."</span> problems in the database.");
 ?>
