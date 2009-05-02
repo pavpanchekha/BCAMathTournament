@@ -24,9 +24,20 @@ function changeBg(a) {
 </head>
 <body>
 <h2>BCA Math Competition Problem Submissions</h2>
+<p>Things to consider:</p>
+<ul>
+<li>Problems should be accessible to 4th, 5th, 6th, 7th, and 8th graders.</li>
+<li>Keep trigonometry problems to a minimum.</li>
+<li>Previous years' problems are available <a href="http://sites.bergen.org/mathcompetition/exams.asp">here</a>.</li>
+</ul>
 <?php
-printf("So far there are <span style=\"font-weight: 600;\">".file_get_contents("count.txt")."</span> problems in the database.");
+// get # problems
+$arr = explode("\n", file_get_contents("probs.txt"));
+printf("So far there are <span style=\"font-weight:600;\">");
+printf(count($arr)-1);
+printf("</span> problems in the database.");
 ?>
+    <p>Use <code>\( latex \)</code> for inline latex and <code>\[ latex \]</code> for out-of-line latex.</p>
 <form name="submission" method="post" action="<?php echo $PHP_SELF; ?>">
 <h3>Enter a Problem:</h3>
 <textarea rows="5" 

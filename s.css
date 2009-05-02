@@ -8,14 +8,17 @@ textarea {
 }
 
 p {
-	border: thin dashed black;
-	padding: 5px;
+	
 }
 
 p.dark {
+	border: thin dashed black;
+	padding: 5px;
 	background: #E6E6FA;
 }
 
 p.light {
+	border: thin dashed black;
+	padding: 5px;
 	background: #FFFAFA;
 }
