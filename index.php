@@ -3,11 +3,6 @@ $a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
 if(strlen($a) != 0) {
 	file_put_contents("probs.txt", "[prob]".$a."[/prob]\n", FILE_APPEND);
 	$submitted = 1;
-	
-	// increment
-	$x = intval(file_get_contents("count.txt"));
-	$x++;
-	file_put_contents("count.txt", $x."\n");
 }
 ?>
 <html>
@@ -37,7 +32,9 @@ printf("So far there are <span style=\"font-weight:600;\">");
 printf(count($arr)-1);
 printf("</span> problems in the database.");
 ?>
-    <p>Use <code>\( latex \)</code> for inline latex and <code>\[ latex \]</code> for out-of-line latex.</p>
+<p>
+	Use <code>\( latex \)</code> for inline latex and <code>\[ latex \]</code> for out-of-line latex. <a href="">(Huh?)</a>
+</p>
 <form name="submission" method="post" action="<?php echo $PHP_SELF; ?>">
 <h3>Enter a Problem:</h3>
 <textarea rows="5" 
