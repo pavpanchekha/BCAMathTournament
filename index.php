@@ -1,3 +1,9 @@
+<!--
+Created by Sherry Wu and Pavel Panchekha.
+Thanks to Union College for jsMath.
+===DEV NOTE===
+- implement CAPTCHA
+-->
 <?php
 $a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
 if(strlen($a) != 0) {
@@ -22,8 +28,10 @@ function changeBg(a) {
 <p>Things to consider:</p>
 <ul>
 <li>Problems should be accessible to 4th, 5th, 6th, 7th, and 8th graders.</li>
-<li>Keep trigonometry problems to a minimum.</li>
-<li>Previous years' problems are available <a href="http://sites.bergen.org/mathcompetition/exams.asp">here</a>.</li>
+<li>For 4th and 5th grade problems, emphasize topics such as geometry and arithmetic.</li>
+<li>Previous years' problems are available <a href="http://sites.bergen.org/mathcompetition/exams.asp">here</a>. 
+Please do not copy these problems verbatim; change the names of the people and the setting if you are going to reuse the idea.</li>
+<li>Last but not least, be creative!</li>
 </ul>
 <?php
 // get # problems
