@@ -7,6 +7,8 @@ Thanks to Union College for jsMath.
 <?php
 $a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
 if(strlen($a) != 0) {
+	// back up existing file to probs.back.txt
+	file_put_contents("probs.back.txt", file_get_contents("probs.txt"));
 	file_put_contents("probs.txt", "[prob]".$a."[/prob]\n", FILE_APPEND);
 	$submitted = 1;
 }
