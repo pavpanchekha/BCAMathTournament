@@ -11,3 +11,5 @@
 [prob]\[\matrix{a&amp; b\cr c&amp; d}.\][/prob]
 [prob]What is the next number in the sequence 1, 3, 4, 7, 11, 18, 29?[/prob]
 [prob]What is 2 + 2 x (2 + 2 x (2 + 2 x (2 + 2 x 2)))?[/prob]
+[prob][/prob]
+[prob][/prob]

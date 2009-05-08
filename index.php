@@ -43,7 +43,8 @@ printf(count($arr)-1);
 printf("</span> problems in the database.");
 ?>
 <p>
-	Use <code>\( latex \)</code> for inline latex and <code>\[ latex \]</code> for out-of-line latex. <a href="">(Huh?)</a>
+	Use <code>\( latex \)</code> for inline latex and <code>\[ latex \]</code> for out-of-line latex. 
+	<a href="http://en.wikipedia.org/wiki/LaTeX">(Huh?)</a>
 </p>
 <form name="submission" method="post" action="<?php echo $PHP_SELF; ?>">
 <h3>Enter a Problem:</h3>
