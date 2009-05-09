@@ -40,32 +40,24 @@ function changeBg(a) {
 <?php
 
 // get # problems
-$arrO = explode("\n", file_get_contents("probs.old.txt"));
-$arrY = explode("\n", file_get_contents("probs.young.txt"));
-printf("So far there are <span style=\"font-weight:600;\">");
-printf(count($arrO)+count($arrY)-2);
+$arrO = explode("[prob]", file_get_contents("probs.old.txt"));
+array_pop($arrO);
+$arrY = explode("[prob]", file_get_contents("probs.young.txt"));
+$contents = array_merge($arrO, $arrY);
+printf("There are <span style=\"font-weight:600;\">");
+printf(count($contents)-1);
 printf("</span> problems in the database.");
 
-$contents = explode("\n", file_get_contents("probs.young.txt"));
-$i = 0;
-for(; $i < count($contents); $i++) {
-	if(substr($contents[$i], 0, 6) == "[prob]") {
-		$tmp = substr($contents[$i], 6, strlen($contents[$i])-13);
-		printf("<p class=\"".(($i%2==0)?"light":"dark")."\">Problem ".($i+1).": ".$tmp."</p>\n");
-	}
-}
-
-$contents = explode("\n", file_get_contents("probs.old.txt"));
-for($j = 0; $j < count($contents); $j++) {
-	if(substr($contents[$j], 0, 6) == "[prob]") {
-		$tmp = substr($contents[$j], 6, strlen($contents[$j])-13);
-		printf("<p class=\"".((($i+$j+1)%2==0)?"light":"dark")."\">Problem ".($i+$j).": ".$tmp."</p>\n");
+for($i = 0; $i < count($contents); $i++) {
+	if(substr($contents[$i], strlen($contents[$i])-8, 7)=="[/prob]") {
+		$tmp = substr($contents[$i], 0, strlen($contents[$i])-8);
+		printf("<p class=\"".(($i%2==0)?"light":"dark")."\">Problem ".$i.": ".$tmp."</p>\n");		
 	}
 }
 ?>
 <form name="submission" method="post" action="<?php echo $PHP_SELF; ?>">
 <h3>Enter a Problem:</h3>
-    <p>Use <code>\( latex \)</code> for inline latex and <code>\[ latex \]</code> for out-of-line latex.</p>
+<p>Use <code>\( latex \)</code> for inline latex and <code>\[ latex \]</code> for out-of-line latex.</p>
 <textarea rows="5" 
 			cols="80" 
 			wrap="soft" 
@@ -73,7 +65,11 @@ for($j = 0; $j < count($contents); $j++) {
 			onclick="changeBg(1)" 
 			onBlur="changeBg(0)">
 </textarea>
-<br />
+<p>
+Please select the appropriate gradelevel for your problem:<br />
+<input type="radio" name="agegroup" value="young" />4th, 5th, and 6th grade<br />
+<input type="radio" name="agegroup" value="old" />7th and 8th grade<br />
+</p>
 <input type="submit" value="Submit" />
 </form>
 </body>
