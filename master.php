@@ -33,14 +33,14 @@ $arrO = explode("[prob]", file_get_contents("probs.old.txt"));
 $arrY = explode("[prob]", file_get_contents("probs.young.txt"));
 array_shift($arrO); array_shift($arrY);
 $contents = array_merge($arrO, $arrY);
-printf("There are <span style=\"font-weight:600;\">");
-printf(count($contents));
-printf("</span> problems in the database.");
+echo "There are <span style=\"font-weight:600;\">";
+echo count($contents);
+echo "</span> problems in the database.";
 
 for($i = 0; $i < count($contents); $i++) {
 	if(substr($contents[$i], strlen($contents[$i])-8, 7)=="[/prob]") {
 		$tmp = substr($contents[$i], 0, strlen($contents[$i])-8);
-		printf("<p class=\"".(($i%2==0)?"light":"dark")."\">Problem ".($i+1).": ".$tmp."</p>\n");		
+		echo "<p class=\"".(($i%2==0)?"light":"dark")."\">Problem ".($i+1).": ".$tmp."</p>\n";
 	}
 }
 ?>
@@ -78,7 +78,7 @@ Please select the appropriate gradelevel for your problem:<br />
 			$submitted = 1;
 		}
 		else {
-			printf("<script type=\"text/javascript\">alert(\"Please select a grade level\")</script>");
+			echo "<script type=\"text/javascript\">alert(\"Please select a grade level\")</script>";
 			$submitted = 0;
 		}
 	}
