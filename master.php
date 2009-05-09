@@ -47,7 +47,7 @@ for($i = 0; $i < count($contents); $i++) {
 ?>
 <form name="submission" method="post" action="<?php echo $PHP_SELF; ?>">
 <h3>Enter a Problem:</h3>
-<p>Use <code>\( latex \)</code> for inline latex and <code>\[ latex \]</code> for out-of-line latex.</p>
+<p>Use <code>&#92;( latex &#92;)</code> for inline latex and <code>&#92;[ latex &#92;]</code> for out-of-line latex.</p>
 <textarea rows="5" 
 			cols="80" 
 			style="white-space: normal;" 
