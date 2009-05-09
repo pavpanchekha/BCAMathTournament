@@ -1,16 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
 Created by Sherry Wu and Pavel Panchekha.
 Thanks to Union College for jsMath.
-===DEV NOTE===
-- implement CAPTCHA
 -->
 <?php
 require_once('../static/recaptchalib.php');
 $submitted = -1;
 if(!isset($_POST["go"])) {
 ?>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 <title>Problem Submissions</title>
 <style type="text/css">
 @import 's.css';
@@ -23,6 +23,7 @@ function changeBg(a) {
 </head>
 <body>
 <h2>BCA Math Competition Problem Submissions</h2>
+<span style="font-weight: 700; font-size: 14pt;">Read this first:</span>
 <p>When writing a problem for the math competition, you should consider these things:</p>
 <ul>
 <li>Problems should be accessible to 4th, 5th, 6th, 7th, and 8th graders.</li>
@@ -51,14 +52,14 @@ You can be a contributor in five easy steps!<br /><br />
 1. Type your problem into this text box:
 <textarea rows="5" 
 			cols="80" 
-			wrap="soft" 
+			style="white-space: normal;"
 			name="space" 
 			onclick="changeBg(1)" 
-			onBlur="changeBg(0)">
+			onblur="changeBg(0)">
 </textarea>
 <p>
 2. Type the answer to your problem in this text box:<br/>
-Answer: <input type="textfield" name="answer" />
+Answer: <input type="text" name="answer" />
 </p>
 <p>
 3. Select the appropriate grade level for your problem:<br />
@@ -111,5 +112,8 @@ if($submitted == 1) {
 }
 $submitted = -1;
 ?>
+<p><a href="http://validator.w3.org/check?uri=referer">
+<img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Transitional" height="31" width="88" />
+</a></p>
 </body>
 </html>
