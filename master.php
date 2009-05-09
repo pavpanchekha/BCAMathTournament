@@ -62,23 +62,25 @@ Please select the appropriate gradelevel for your problem:<br />
 <input type="submit" value="Submit" name="submit" />
 </form>
 <?php
-$a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
-$a = str_ireplace("\\\\", "\\", $a);
-if(strlen($a) != 0) {
-	// back up existing file to probs.back.txt
-	if($_POST["agegroup"] == "young") {
-		file_put_contents("probs.young.back.txt", file_get_contents("probs.young.txt"));
-		file_put_contents("probs.young.txt", "[prob]".$a."[/prob]\n", FILE_APPEND);
-		$submitted = 1;
-	}
-	else if($_POST["agegroup"] == "old") {
-		file_put_contents("probs.old.back.txt", file_get_contents("probs.old.txt"));
-		file_put_contents("probs.old.txt", "[prob]".$a."[/prob]\n", FILE_APPEND);
-		$submitted = 1;
-	}
-	else {
-		printf("<script type=\"text/javascript\">alert(\"Please select a grade level\")</script>");
-		$submitted = 0;
+} else {
+	$a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
+	$a = str_ireplace("\\\\", "\\", $a);
+	if(strlen($a) != 0) {
+		// back up existing file to probs.back.txt
+		if($_POST["agegroup"] == "young") {
+			file_put_contents("probs.young.back.txt", file_get_contents("probs.young.txt"));
+			file_put_contents("probs.young.txt", "[prob]".$a."[/prob]\n", FILE_APPEND);
+			$submitted = 1;
+		}
+		else if($_POST["agegroup"] == "old") {
+			file_put_contents("probs.old.back.txt", file_get_contents("probs.old.txt"));
+			file_put_contents("probs.old.txt", "[prob]".$a."[/prob]\n", FILE_APPEND);
+			$submitted = 1;
+		}
+		else {
+			printf("<script type=\"text/javascript\">alert(\"Please select a grade level\")</script>");
+			$submitted = 0;
+		}
 	}
 }
 ?>
