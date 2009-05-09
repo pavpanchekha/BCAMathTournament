@@ -2,6 +2,7 @@
 <!--
 Created by Sherry Wu and Pavel Panchekha.
 Thanks to Union College for jsMath.
+Thanks to Carnegie Mellon for reCAPTCHA.
 -->
 <?php
 $submitted = -1;
@@ -40,7 +41,14 @@ printf("</span> problems in the database.");
 for($i = 0; $i < count($contents); $i++) {
 	if(substr($contents[$i], strlen($contents[$i])-8, 7)=="[/prob]") {
 		$tmp = substr($contents[$i], 0, strlen($contents[$i])-8);
-		printf("<p class=\"".(($i%2==0)?"light":"dark")."\">Problem ".($i+1).": ".$tmp."</p>\n");		
+//		printf("<p class=\"".(($i%2==0)?"light":"dark")."\">Problem ".($i+1).": ".$tmp."</p>\n");
+		printf("<p class=\"");
+		printf((($i%2==0)?"light":"dark"));
+		printf("\">Problem ");
+		printf($i+1);
+		printf(": ");
+		printf($tmp);
+		printf("</p>\n");
 	}
 }
 ?>

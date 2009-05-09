@@ -4,7 +4,7 @@ Created by Sherry Wu and Pavel Panchekha.
 Thanks to Union College for jsMath.
 -->
 <?php
-require_once('../static/recaptchalib.php');
+require_once('recaptchalib.php');
 $submitted = -1;
 if(!isset($_POST["go"])) {
 ?>
