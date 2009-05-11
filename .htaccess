@@ -1,6 +1,7 @@
 AuthUserFile /.htpasswd
 AuthName "Problem Submission Site"
 AuthType Digest
+Options -Indexes
 
 <Files "master.php">
 	Require valid-user
