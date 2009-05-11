@@ -58,8 +58,7 @@ You can be a contributor in five easy steps!<br /><br />
 			onblur="changeBg(0)">
 </textarea>
 <p>
-2. Type the answer to your problem in this text box:<br/>
-Answer: <input type="text" name="answer" />
+2. Type the answer to your problem in this text box: <input type="text" name="answer" />
 </p>
 <p>
 3. Select the appropriate grade level for your problem:<br />
@@ -87,7 +86,7 @@ echo recaptcha_get_html($publickey);
 	
 	$a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
 	$a = str_ireplace("\\\\", "\\", $a);
-	$ans = $_POST["answer"];
+	$ans = trim(htmlspecialchars($_POST["answer"]));
 	if($ans == "") die("You forgot to include the answer!<br /><a href=\".\">Try again</a>");
 	if(strlen($a) != 0) {
 		// back up existing file to probs.back.txt

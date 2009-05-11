@@ -106,7 +106,10 @@ for($i = 0; $i < count($arrO); $i++) {
 			onBlur="changeBg(0)">
 </textarea>
 <p>
-Please select the appropriate grade level for your problem:<br />
+Type the answer to your problem in this text box: <input type="text" name="answer" />
+</p>
+<p>
+Select the appropriate grade level for your problem:<br />
 <input type="radio" name="agegroup" value="young" />4th, 5th, and 6th grade<br />
 <input type="radio" name="agegroup" value="old" />7th and 8th grade<br />
 </p>
@@ -116,23 +119,22 @@ Please select the appropriate grade level for your problem:<br />
 } else {
 	$a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
 	$a = str_ireplace("\\\\", "\\", $a);
+	$ans = trim(htmlspecialchars($_POST["answer"]));
+	if($ans = "") die("You forgot to include the answer!<br /><a href=\".\">Try again</a>");
 	if(strlen($a) != 0) {
 		// back up existing file to probs.back.txt
 		if($_POST["agegroup"] == "young") {
 			file_put_contents("probs.young.back.txt", file_get_contents("probs.young.txt"));
-			file_put_contents("probs.young.txt", "[prob]".$a."[/prob]\n", FILE_APPEND);
-			echo "Thanks for your submission!";
-			$submitted = 1;
+			file_put_contents("probs.young.txt", "[prob]".$a." (".$ans.")"."[/prob]\n", FILE_APPEND);
+			echo "Thanks for your submission!<br /><a href=\"master.php\">Back</a>";
 		}
 		else if($_POST["agegroup"] == "old") {
 			file_put_contents("probs.old.back.txt", file_get_contents("probs.old.txt"));
-			file_put_contents("probs.old.txt", "[prob]".$a."[/prob]\n", FILE_APPEND);
-			echo "Thanks for your submission!";
-			$submitted = 1;
+			file_put_contents("probs.old.txt", "[prob]".$a." (".$ans.")"."[/prob]\n", FILE_APPEND);
+			echo "Thanks for your submission!<br /><a href=\"master.php\">Back</a>";
 		}
 		else {
-			echo "Please select a grade level";
-			$submitted = 0;
+			die("Please select a grade level");
 		}
 	}
 }
