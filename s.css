@@ -7,14 +7,8 @@ textarea {
 	font: 12pt "Courier New";
 }
 
-p.dark {
+p.prob {
 	border: thin dashed black;
 	padding: 5px;
-	background: #E6E6FA;
-}
-
-p.light {
-	border: thin dashed black;
-	padding: 5px;
-	background: #FFFAFA;
+	background: #F0F8FF;
 }
