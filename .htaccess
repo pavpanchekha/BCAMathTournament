@@ -7,23 +7,10 @@ Options -Indexes
 	Require valid-user
 </Files>
 
-<Files "probs.back.txt">
+<Files "leprobs.back.xml">
 	Require valid-user
 </Files>
 
-<Files "probs.old.back.txt">
+<Files "leprobs.xml">
 	Require valid-user
 </Files>
-
-<Files "probs.old.txt">
-	Require valid-user
-</Files>
-
-<Files "probs.young.back.txt">
-	Require valid-user
-</Files>
-
-<Files "probs.young.txt">
-	Require valid-user
-</Files>
-

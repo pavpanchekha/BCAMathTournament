@@ -36,10 +36,9 @@ Please do not copy these problems verbatim; change the names of the people and t
 </ul>
 <?php
 // get # problems
-$arrO = explode("[prob]", file_get_contents("probs.old.txt"));
-$arrY = explode("[prob]", file_get_contents("probs.young.txt"));
+$arr = explode("<problem>", file_get_contents("leprobs.xml"));
 printf("FYI: There are <span style=\"font-weight:600;\">");
-printf(count($arrO)+count($arrY)-2);
+printf(count($arr));
 printf("</span> problems in the database.");
 ?>
 <p>
@@ -48,7 +47,8 @@ printf("</span> problems in the database.");
 </p>
 <form name="submission" method="post" action="<?php echo $PHP_SELF; ?>">
 <span style="font-weight: 700; font-size: 14pt;">Submit your own problem:</span><br />
-You can be a contributor in five easy steps!<br /><br />
+You can be a contributor in six easy steps!
+<p>0. Type your name in the text box to the right: <input type="text" name="author" /></p>
 1. Type your problem into this text box:
 <textarea rows="5" 
 			cols="80" 
@@ -57,9 +57,7 @@ You can be a contributor in five easy steps!<br /><br />
 			onclick="changeBg(1)" 
 			onblur="changeBg(0)">
 </textarea>
-<p>
-2. Type the answer to your problem in this text box: <input type="text" name="answer" />
-</p>
+<p>2. Type the answer to your problem in this text box: <input type="text" name="answer" /></p>
 <p>
 3. Select the appropriate grade level for your problem:<br />
 <input type="radio" name="agegroup" value="young" />4th, 5th, and 6th grade<br />
@@ -87,17 +85,19 @@ echo recaptcha_get_html($publickey);
 	$a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
 	$a = str_ireplace("\\\\", "\\", $a);
 	$ans = trim(htmlspecialchars($_POST["answer"]));
+	$author = trim(htmlspecialchars($_POST["author"]));
 	if($ans == "") die("You forgot to include the answer!<br /><a href=\".\">Try again</a>");
+	if($author == "") die("You forgot to put your name!<br /><a href=\".\">Try again</a>");
 	if(strlen($a) != 0) {
-		// back up existing file to probs.back.txt
+		$tmp = file_get_contents("leprobs.xml");
+		$tmp = str_replace("</db>", "", $tmp);
+		file_put_contents("leprobs.xml", $tmp);
 		if($_POST["agegroup"] == "young") {
-			file_put_contents("probs.young.back.txt", file_get_contents("probs.young.txt"));
-			file_put_contents("probs.young.txt", "[prob]".$a." (".$ans.")"."[/prob]\n", FILE_APPEND);
+			file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$ans."</answer>\n\t<grade>young</grade>\n</problem>\n</db>\n", FILE_APPEND);
 			$submitted = 1;
 		}
 		else if($_POST["agegroup"] == "old") {
-			file_put_contents("probs.old.back.txt", file_get_contents("probs.old.txt"));
-			file_put_contents("probs.old.txt", "[prob]".$a." (".$ans.")"."[/prob]\n", FILE_APPEND);
+			file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$ans."</answer>\n\t<grade>old</grade>\n</problem>\n</db>\n", FILE_APPEND);
 			$submitted = 1;
 		}
 		else die("You forgot to include the grade level!<br /><a href=\".\">Try again</a>");
@@ -106,6 +106,7 @@ echo recaptcha_get_html($publickey);
 }
 
 if($submitted == 1) {
+	file_put_contents("leprobs.back.xml", file_get_contents("leprobs.xml"));
 	printf("Thanks for your submission!<br />\n");
 	printf("<a href=\".\">Enter another problem</a>");
 }

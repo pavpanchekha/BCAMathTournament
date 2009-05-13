@@ -60,23 +60,18 @@ function changeView(i) {
 <?php
 
 // get # problems
-$arrO = explode("[prob]", file_get_contents("probs.old.txt"));
-$arrY = explode("[prob]", file_get_contents("probs.young.txt"));
-array_shift($arrO); array_shift($arrY);
-$contents = array_merge($arrO, $arrY);
-echo "There are <span style=\"font-weight:600;\">";
-echo count($contents);
-echo "</span> problems in the datumsbase. <br />\n";
-echo "Now viewing: <span id=\"viewing\">All</span> problems\n";
+$arr = explode("<problem>", file_get_contents("leprobs.xml"));
+echo "FYI: There are <span style=\"font-weight:600;\">".count($arr)."</span> problems in the database.";
+echo "<br />Now viewing: <span id=\"viewing\">All</span> problems\n";
 
 echo "<div id=\"all\">\n";
-for($i = 0; $i < count($contents); $i++) {
-	if(substr($contents[$i], strlen($contents[$i])-8, 7)=="[/prob]") {
-		$tmp = substr($contents[$i], 0, strlen($contents[$i])-8);
-		echo "<p class=\"".(($i%2==0)?"light":"dark")."\">Problem ".($i+1).": ".$tmp."</p>\n";
-	}
+for($i = 0; $i < count($arr)-1; $i++) {
+	echo "<p class=\"".(($i%2==0)?"light":"dark")."\">Problem ".($i+1).": ";
+	$tmp = substr($arr[$i+1], 0, strlen($arr[$i+1])-11);
+	$author = substr($tmp, 7);
+	echo $tmp."</p>\n";
 } echo "</div>\n";
-
+/*
 echo "<div id=\"young\" style=\"display: none;\">\n";
 for($i = 0; $i < count($arrY); $i++) {
 	if(substr($arrY[$i], strlen($arrY[$i])-8, 7)=="[/prob]") {
@@ -92,12 +87,13 @@ for($i = 0; $i < count($arrO); $i++) {
 		echo "<p class=\"".(($i%2==0)?"light":"dark")."\">Problem ".($i+1).": ".$tmp."</p>\n";
 	}	
 } echo "</div>\n";
-
+*/
 ?>
 
 <form name="submission" method="post" action="<?php echo $PHP_SELF; ?>">
 <h3>Enter a Problem:</h3>
 <p>Use <code>&#92;( latex &#92;)</code> for inline latex and <code>&#92;[ latex &#92;]</code> for out-of-line latex.</p>
+<p>Type your name in the text box to the right: <input type="text" name="author" /></p>
 <textarea rows="5" 
 			cols="80" 
 			style="white-space: normal;" 
@@ -105,9 +101,7 @@ for($i = 0; $i < count($arrO); $i++) {
 			onclick="changeBg(1)" 
 			onBlur="changeBg(0)">
 </textarea>
-<p>
-Type the answer to your problem in this text box: <input type="text" name="answer" />
-</p>
+<p>Type the answer to your problem in this text box: <input type="text" name="answer" /></p>
 <p>
 Select the appropriate grade level for your problem:<br />
 <input type="radio" name="agegroup" value="young" />4th, 5th, and 6th grade<br />
@@ -120,22 +114,24 @@ Select the appropriate grade level for your problem:<br />
 	$a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
 	$a = str_ireplace("\\\\", "\\", $a);
 	$ans = trim(htmlspecialchars($_POST["answer"]));
+	$author = trim(htmlspecialchars($_POST["author"]));
 	if($ans = "") die("You forgot to include the answer!<br /><a href=\".\">Try again</a>");
+	if($author == "") die("You forgot to put your name!<br /><a href=\".\">Try again</a>");
 	if(strlen($a) != 0) {
-		// back up existing file to probs.back.txt
+		$tmp = file_get_contents("leprobs.xml");
+		$tmp = str_replace("</db>", "", $tmp);
+		file_put_contents("leprobs.xml", $tmp);
 		if($_POST["agegroup"] == "young") {
-			file_put_contents("probs.young.back.txt", file_get_contents("probs.young.txt"));
-			file_put_contents("probs.young.txt", "[prob]".$a." (".$ans.")"."[/prob]\n", FILE_APPEND);
+			file_put_contents("leprobs.back.xml", file_get_contents("leprobs.xml"));
+			file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$ans."</answer>\n\t<grade>young</grade>\n</problem>", FILE_APPEND);
 			echo "Thanks for your submission!<br /><a href=\"master.php\">Back</a>";
 		}
 		else if($_POST["agegroup"] == "old") {
-			file_put_contents("probs.old.back.txt", file_get_contents("probs.old.txt"));
-			file_put_contents("probs.old.txt", "[prob]".$a." (".$ans.")"."[/prob]\n", FILE_APPEND);
+			file_put_contents("leprobs.back.xml", file_get_contents("leprobs.xml"));
+			file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$ans."</answer>\n\t<grade>old</grade>\n</problem>", FILE_APPEND);
 			echo "Thanks for your submission!<br /><a href=\"master.php\">Back</a>";
 		}
-		else {
-			die("Please select a grade level");
-		}
+		else die("Please select a grade level");
 	}
 }
 ?>
