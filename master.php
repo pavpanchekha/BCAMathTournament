@@ -3,6 +3,8 @@
 Created by Sherry Wu and Pavel Panchekha.
 Thanks to Union College for jsMath.
 Thanks to Carnegie Mellon for reCAPTCHA.
+We need to implement something that will filter out problems from people 
+	outside of our school
 -->
 <?php
 $submitted = -1;
