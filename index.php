@@ -79,9 +79,11 @@ echo recaptcha_get_html($publickey);
 </form>
 <p>Kudos to:<ul>
 <li>Sherry Wu and Pavel Panchekha for setting up and debugging the site!</li>
-<li>Union College for jsMath!</li>
-<li>Carnegie Mellon for reCAPTCHA!</li>
+<li>git and github for making the collaboration possible!</li>
 <li>Bergen County Academies Math Boosters for hosting this excellent competition!</li>
+<li>Carnegie Mellon for reCAPTCHA!</li>
+<li>Union College for jsMath!</li>
+<li>Zubrag for easy PHP password protection!</li>
 </ul></p>
 <?php
 } else {

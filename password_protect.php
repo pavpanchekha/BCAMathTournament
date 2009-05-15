@@ -107,6 +107,7 @@ function showLoginPasswordProtect($error_msg) {
   <div style="width:500px; margin-left:auto; margin-right:auto; text-align:center">
   <form method="post">
     <h3>Please enter password to access this page</h3>
+	<h4>By the way, you need to enable COOKIES</h4>
     <font color="red"><?php echo $error_msg; ?></font><br />
 <?php if (USE_USERNAME) echo 'Login:<br /><input type="input" name="access_login" /><br />Password:<br />'; ?>
     <input type="password" name="access_password" /><p></p><input type="submit" name="Submit" value="Submit" />
