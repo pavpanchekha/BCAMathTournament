@@ -1,10 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php 
+require_once('recaptchalib.php');
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
 Created by Sherry Wu and Pavel Panchekha.
 Thanks to Union College for jsMath.
 -->
 <?php
-require_once('recaptchalib.php');
 $submitted = -1;
 if(!isset($_POST["go"])) {
 ?>
