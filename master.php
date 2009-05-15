@@ -127,12 +127,12 @@ Select the appropriate grade level for your problem:<br />
 		file_put_contents("leprobs.xml", $tmp);
 		if($_POST["agegroup"] == "young") {
 			file_put_contents("leprobs.back.xml", file_get_contents("leprobs.xml"));
-			file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$ans."</answer>\n\t<grade>young</grade>\n</problem>", FILE_APPEND);
+			file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$ans."</answer>\n\t<grade>young</grade>\n</problem>\n</db>\n", FILE_APPEND);
 			echo "Thanks for your submission!<br /><a href=\"master.php\">Back</a>";
 		}
 		else if($_POST["agegroup"] == "old") {
 			file_put_contents("leprobs.back.xml", file_get_contents("leprobs.xml"));
-			file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$ans."</answer>\n\t<grade>old</grade>\n</problem>", FILE_APPEND);
+			file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$ans."</answer>\n\t<grade>old</grade>\n</problem>\n</db>\n", FILE_APPEND);
 			echo "Thanks for your submission!<br /><a href=\"master.php\">Back</a>";
 		}
 		else die("Please select a grade level");
