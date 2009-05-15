@@ -1,10 +1,12 @@
 <?php
 require('password_protect.php');
 require_once('recaptchalib.php');
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
 Created by Sherry Wu and Pavel Panchekha.
 Thanks to Union College for jsMath.
+Thanks to Carnegie Mellon for reCAPTCHA.
 -->
 <?php
 $submitted = -1;
@@ -86,25 +88,18 @@ echo recaptcha_get_html($publickey);
 	
 	$a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
 	$a = str_ireplace("\\\\", "\\", $a);
-	$ans = trim(htmlspecialchars($_POST["answer"]));
+	$answer = trim(htmlspecialchars($_POST["answer"]));
+	$age = $_POST["agegroup"];
 	$author = trim(htmlspecialchars($_POST["author"]));
-	if($ans == "") die("You forgot to include the answer!<br /><a href=\".\">Try again</a>");
+	if($answer == "") die("You forgot to include the answer!<br /><a href=\".\">Try again</a>");
 	if($author == "") die("You forgot to put your name!<br /><a href=\".\">Try again</a>");
-	if(strlen($a) != 0) {
-		$tmp = file_get_contents("leprobs.xml");
-		$tmp = str_replace("</db>", "", $tmp);
-		file_put_contents("leprobs.xml", $tmp);
-		if($_POST["agegroup"] == "young") {
-			file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$ans."</answer>\n\t<grade>young</grade>\n</problem>\n</db>\n", FILE_APPEND);
-			$submitted = 1;
-		}
-		else if($_POST["agegroup"] == "old") {
-			file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$ans."</answer>\n\t<grade>old</grade>\n</problem>\n</db>\n", FILE_APPEND);
-			$submitted = 1;
-		}
-		else die("You forgot to include the grade level!<br /><a href=\".\">Try again</a>");
-	}
-	else die("Your problem is too short!<br /><a href=\".\">Try again</a>");
+	if($a == "") die("You didn't submit a problem!<br /><a href=\".\">Try again</a>");
+	if($age != "young" && $age != "old") die("You didn't select an age group!<br /><a href=\".\">Try again</a>");
+	$tmp = file_get_contents("leprobs.xml");
+	$tmp = str_replace("</db>", "", $tmp);
+	file_put_contents("leprobs.xml", $tmp);
+	file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$answer."</answer>\n\t<grade>".$age."</grade>\n</problem>\n</db>\n", FILE_APPEND);
+	$submitted = 1;	
 }
 
 if($submitted == 1) {

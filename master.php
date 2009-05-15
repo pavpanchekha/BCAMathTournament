@@ -3,8 +3,6 @@
 Created by Sherry Wu and Pavel Panchekha.
 Thanks to Union College for jsMath.
 Thanks to Carnegie Mellon for reCAPTCHA.
-We need to implement something that will filter out problems from people 
-	outside of our school
 -->
 <?php
 $submitted = -1;
@@ -105,7 +103,7 @@ fclose($fp);
 			onclick="changeBg(1)" 
 			onBlur="changeBg(0)">
 </textarea>
-<p>Type the answer to your problem in this text box: <input type="text" name="answer" /></p>
+<p>Type the answer to your problem in this text box: <input type="text" name="answer" value="42" /></p>
 <p>
 Select the appropriate grade level for your problem:<br />
 <input type="radio" name="agegroup" value="young" />4th, 5th, and 6th grade<br />
@@ -117,26 +115,18 @@ Select the appropriate grade level for your problem:<br />
 } else {
 	$a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
 	$a = str_ireplace("\\\\", "\\", $a);
-	$ans = trim(htmlspecialchars($_POST["answer"]));
+	$answer = trim(htmlspecialchars($_POST["answer"]));
+	$age = $_POST["agegroup"];
 	$author = trim(htmlspecialchars($_POST["author"]));
-	if($ans = "") die("You forgot to include the answer!<br /><a href=\".\">Try again</a>");
-	if($author == "") die("You forgot to put your name!<br /><a href=\".\">Try again</a>");
-	if(strlen($a) != 0) {
-		$tmp = file_get_contents("leprobs.xml");
-		$tmp = str_replace("</db>", "", $tmp);
-		file_put_contents("leprobs.xml", $tmp);
-		if($_POST["agegroup"] == "young") {
-			file_put_contents("leprobs.back.xml", file_get_contents("leprobs.xml"));
-			file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$ans."</answer>\n\t<grade>young</grade>\n</problem>\n</db>\n", FILE_APPEND);
-			echo "Thanks for your submission!<br /><a href=\"master.php\">Back</a>";
-		}
-		else if($_POST["agegroup"] == "old") {
-			file_put_contents("leprobs.back.xml", file_get_contents("leprobs.xml"));
-			file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$ans."</answer>\n\t<grade>old</grade>\n</problem>\n</db>\n", FILE_APPEND);
-			echo "Thanks for your submission!<br /><a href=\"master.php\">Back</a>";
-		}
-		else die("Please select a grade level");
-	}
+	if($answer == "") die("You forgot to include the answer!<br /><a href=\"master.php\">Try again</a>");
+	if($author == "") die("You forgot to put your name!<br /><a href=\"master.php\">Try again</a>");
+	if($a == "") die("You didn't submit a problem!<br /><a href=\"master.php\">Try again</a>");
+	if($age != "young" && $age != "old") die("You didn't select an age group!<br /><a href=\"master.php\">Try again</a>");
+	$tmp = file_get_contents("leprobs.xml");
+	$tmp = str_replace("</db>", "", $tmp);
+	file_put_contents("leprobs.xml", $tmp);
+	file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$answer."</answer>\n\t<grade>".$age."</grade>\n</problem>\n</db>\n", FILE_APPEND);
+	echo "Thanks for your submission!<br /><a href=\"master.php\">Back</a>";
 }
 ?>
 </body>
