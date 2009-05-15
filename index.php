@@ -32,9 +32,9 @@ function changeBg(a) {
 <ul>
 <li>Problems should be accessible to 4th, 5th, 6th, 7th, and 8th graders.</li>
 <li>For 4th and 5th grade problems, emphasize elementary topics such as geometry and arithmetic.</li>
-<li>Logic questions are also good.</li>
+<li>Logic questions are good.</li>
 <li>Previous years' problems are available <a href="http://sites.bergen.org/mathcompetition/exams.asp">here</a>. 
-Please do not copy these problems verbatim; change the names of the people and the setting if you are going to reuse the idea.</li>
+<span style="font-weight:700;">DO NOT copy these problems or problems from anywhere else verbatim</span>; change the names of the people and the setting if you are going to reuse the idea.</li>
 <li><span style="font-weight: 700;">Be sure to type in the answer to your problem in the Answer field! Problems without answers will be rejected!</span></li>
 <li>Last but not least, be creative!</li>
 </ul>
@@ -42,7 +42,7 @@ Please do not copy these problems verbatim; change the names of the people and t
 // get # problems
 $arr = explode("<problem>", file_get_contents("leprobs.xml"));
 printf("FYI: There are <span style=\"font-weight:600;\">");
-printf(count($arr));
+printf(count($arr)-1);
 printf("</span> problems in the database.");
 ?>
 <p>
@@ -77,6 +77,12 @@ echo recaptcha_get_html($publickey);
 <input type="submit" value="Submit" name="go" />
 </p>
 </form>
+<p>Kudos to:<ul>
+<li>Sherry Wu and Pavel Panchekha for setting up and debugging the site!</li>
+<li>Union College for jsMath!</li>
+<li>Carnegie Mellon for reCAPTCHA!</li>
+<li>Bergen County Academies Math Boosters for hosting this excellent competition!</li>
+</ul></p>
 <?php
 } else {
 	$privatekey = "6LcIVwYAAAAAAMqZxccawplhrDu2hnvRzmwm8s5r";
