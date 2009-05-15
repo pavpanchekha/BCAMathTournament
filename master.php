@@ -64,8 +64,8 @@ function changeView(i) {
 <?php
 
 // get # problems
-//$arr = explode("<problem>", file_get_contents("leprobs.xml"));
-echo "FYI: There are <span style=\"font-weight:600;\">".count($arr) - 1."</span> problems in the database.";
+$arr = explode("<problem>", file_get_contents("leprobs.xml"));
+echo "FYI: There are <span style=\"font-weight:600;\">".(count($arr) - 1)."</span> problems in the database.";
 //echo "<br />Now viewing: <span id=\"viewing\">All</span> problems<br />\n";
 
 function contents($parser, $data){ 
