@@ -41,7 +41,7 @@ function changeBg(a) {
 <div style="border-bottom:1px dotted black;"></div><br />
 <span style="font-weight: 700; font-size: 14pt;">About Community Service Hours:</span>
 <p>Writing meaningful and creative problems earns you community service hours! The number of hours you get will be determined by the following formula: 
-<pre>ceil(#problems/12)</pre>
+<pre>round(#problems/12)</pre>
 You can see how much you have contributed <a href="rank">here</a>.</p>
 <div style="border-bottom:1px dotted black;"></div><br />
 <?php
