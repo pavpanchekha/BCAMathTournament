@@ -15,6 +15,7 @@ if(!isset($_POST["go"])) {
 <script src="/jsMath/easy/load.js"></script>
 <script src="/jsMath/jsMath-easy-load.js"></script>
 <script src="/jsMath/plugins/autoload.js"></script>
+<script src="/jsMath/plugins/spriteImageFonts.js"></script>
 <style type="text/css">
 @import 's.css';
 </style>
@@ -103,7 +104,7 @@ fclose($fp);
 			onclick="changeBg(1)" 
 			onBlur="changeBg(0)">
 </textarea>
-<p>Type the answer to your problem in this text box: <input type="text" name="answer" value="42" /></p>
+<p>Type the answer to your problem in this text box: <input type="text" name="answer" /></p>
 <p>
 Select the appropriate grade level for your problem:<br />
 <input type="radio" name="agegroup" value="young" />4th, 5th, and 6th grade<br />

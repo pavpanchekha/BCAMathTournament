@@ -18,7 +18,7 @@ while($tok !== false) {
 		$lePerson = substr($tok, 9, strlen($tok)-18);
 		for($i = 0; $i < count($arr) && $isabsent == 1; $i++) {
 			if($arr[$lePerson] > 0) {
-				echo $lePerson;
+//				echo $lePerson;
 				$isabsent = 0;
 			}
 		}

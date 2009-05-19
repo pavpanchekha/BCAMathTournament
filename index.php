@@ -34,10 +34,16 @@ function changeBg(a) {
 <li>For 4th and 5th grade problems, emphasize elementary topics such as geometry and arithmetic.</li>
 <li>Logic questions are good.</li>
 <li>Previous years' problems are available <a href="http://sites.bergen.org/mathcompetition/exams.asp">here</a>. 
-<span style="font-weight:700;">DO NOT copy these problems or problems from anywhere else verbatim</span>; change the names of the people and the setting if you are going to reuse the idea.</li>
+<span style="font-weight:700;">DO NOT copy these problems or problems from anywhere else <a href="http://en.wiktionary.org/wiki/verbatim">verbatim</a></span>; change the names of the people and the setting if you are going to reuse the idea.</li>
 <li><span style="font-weight: 700;">Be sure to type in the answer to your problem in the Answer field! Problems without answers will be rejected!</span></li>
 <li>Last but not least, be creative!</li>
 </ul>
+<div style="border-bottom:1px dotted black;"></div><br />
+<span style="font-weight: 700; font-size: 14pt;">About Community Service Hours:</span>
+<p>Writing meaningful and creative problems earns you community service hours! The number of hours you get will be determined by the following formula: 
+<pre>ceil(#problems/12)</pre>
+You can see how much you have contributed <a href="rank">here</a>.</p>
+<div style="border-bottom:1px dotted black;"></div><br />
 <?php
 // get # problems
 $arr = explode("<problem>", file_get_contents("leprobs.xml"));
@@ -77,6 +83,7 @@ echo recaptcha_get_html($publickey);
 <input type="submit" value="Submit" name="go" />
 </p>
 </form>
+<div style="border-bottom:1px dotted black;"></div>
 <p>Kudos to:<ul>
 <li>Sherry Wu and Pavel Panchekha for setting up and debugging the site!</li>
 <li>git and github for making the collaboration possible!</li>
