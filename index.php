@@ -33,7 +33,7 @@ function changeBg(a) {
 <li>Problems should be accessible to 4th, 5th, 6th, 7th, and 8th graders.</li>
 <li>For 4th and 5th grade problems, emphasize elementary topics such as geometry and arithmetic.</li>
 <li>Logic questions are good.</li>
-<li>Previous years' problems are available <a href="http://sites.bergen.org/mathcompetition/exams.asp">here</a>. 
+<li>Previous years' problems are available <a href="http://sites.bergen.org/mathcompetition/exams.asp">here</a>. <br />
 <span style="font-weight:700;">DO NOT copy these problems or problems from anywhere else <a href="http://en.wiktionary.org/wiki/verbatim">verbatim</a></span>; change the names of the people and the setting if you are going to reuse the idea.</li>
 <li><span style="font-weight: 700;">Be sure to type in the answer to your problem in the Answer field! Problems without answers will be rejected!</span></li>
 <li>Last but not least, be creative!</li>
@@ -41,8 +41,8 @@ function changeBg(a) {
 <div style="border-bottom:1px dotted black;"></div><br />
 <span style="font-weight: 700; font-size: 14pt;">About Community Service Hours:</span>
 <p>Writing meaningful and creative problems earns you community service hours! The number of hours you get will be determined by the following formula: 
-<pre>round(#problems/12)</pre>
-You can see how much you have contributed <a href="rank">here</a>.</p>
+<pre>round(#problems_that_get_selected/12)</pre>
+You can see how much you have contributed <a href="rank">here</a>.</p><br /><br />
 <div style="border-bottom:1px dotted black;"></div><br />
 <?php
 // get # problems

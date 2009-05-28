@@ -95,7 +95,7 @@ fclose($fp);
 
 <form name="submission" method="post" action="<?php echo $PHP_SELF; ?>">
 <h3>Enter a Problem:</h3>
-<p>Use <code>&#92;( latex &#92;)</code> for inline latex and <code>&#92;[ latex &#92;]</code> for out-of-line latex.</p>
+<p>Use <code>\(\backslash( latex \backslash)\)</code> for inline latex and <code>\(\backslash[ latex \backslash]\)</code> for out-of-line latex.</p>
 <p>Type your name in the text box to the right: <input type="text" name="author" /></p>
 <textarea rows="5" 
 			cols="80" 
