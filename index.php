@@ -26,6 +26,7 @@ function changeBg(a) {
 </script>
 </head>
 <body>
+<div id="centre">
 <h2>BCA Math Competition Problem Submissions</h2>
 <span style="font-weight: 700; font-size: 14pt;">Read this first:</span>
 <p>When writing a problem for the math competition, you should consider these things:</p>
@@ -40,7 +41,7 @@ function changeBg(a) {
 </ul>
 <div style="border-bottom:1px dotted black;"></div><br />
 <span style="font-weight: 700; font-size: 14pt;">About Community Service Hours:</span>
-<p>Writing meaningful and creative problems earns you community service hours! The number of hours you get will be determined by the following formula: 
+<p>Writing meaningful and creative problems earns you community service hours! We will need to select 250 problems for the five competitions so there will be plenty of opportunities for your problems to be picked! The number of hours you get will be determined by the following formula: 
 <pre>round(#problems_that_get_selected/12)</pre>
 You can see how much you have contributed <a href="rank">here</a>.</p><br /><br />
 <div style="border-bottom:1px dotted black;"></div><br />
@@ -127,5 +128,6 @@ $submitted = -1;
 <p><a href="http://validator.w3.org/check?uri=referer">
 <img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Transitional" height="31" width="88" />
 </a></p>
+</div>
 </body>
 </html>

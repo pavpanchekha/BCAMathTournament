@@ -23,35 +23,10 @@ if(!isset($_POST["go"])) {
 function changeBg(a) {
 	document.submission.space.style.background = ((a)?'#FFFFE0':'white');
 }
-/*
-function changeView(i) {
-	a = document.getElementById("all");
-	y = document.getElementById("young");
-	o = document.getElementById("old");
-	v = document.getElementById("viewing");
-	if(i == 0) {
-		a.style.display = "block";
-		y.style.display = "none";
-		o.style.display = "none";
-		v.innerHTML = "All";
-	}
-	else if(i == 1) {
-		a.style.display = "none";
-		y.style.display = "block";
-		o.style.display = "none";
-		v.innerHTML = "4th, 5th, 6th grade ";
-	}
-	else if(i == 2) {
-		a.style.display = "none";
-		y.style.display = "none";
-		o.style.display = "block";
-		v.innerHTML = "7th & 8th grade ";
-	}
-}
-*/
 </script>
 </head>
 <body>
+<div id="centre">
 <h2>BCA Math Competition Problem Submission Site</h2>
 <!-- toolbar
 <div style="float:right;">
@@ -88,7 +63,7 @@ xml_set_element_handler($allProbs, "startTag", "endTag");
 xml_set_character_data_handler($allProbs, "contents"); 
 $fp = fopen($file, "r"); 
 $data = fread($fp, 80000); 
-if(!(xml_parse($allProbs, $data, feof($fp))))die("Error on line " . xml_get_current_line_number($allProbs));
+if(!(xml_parse($allProbs, $data, feof($fp))))die("Error on line ".xml_get_current_line_number($allProbs));
 xml_parser_free($allProbs); 
 fclose($fp);
 ?>
@@ -116,7 +91,7 @@ Select the appropriate grade level for your problem:<br />
 } else {
 	$a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
 	$a = str_ireplace("\\\\", "\\", $a);
-	$answer = trim(htmlspecialchars($_POST["answer"]));
+	$answer = str_ireplace("\\\\", "\\", trim(htmlspecialchars($_POST["answer"])));
 	$age = $_POST["agegroup"];
 	$author = trim(htmlspecialchars($_POST["author"]));
 	if($answer == "") die("You forgot to include the answer!<br /><a href=\"master.php\">Try again</a>");
@@ -130,5 +105,6 @@ Select the appropriate grade level for your problem:<br />
 	echo "Thanks for your submission!<br /><a href=\"master.php\">Back</a>";
 }
 ?>
+</div>
 </body>
 </html>

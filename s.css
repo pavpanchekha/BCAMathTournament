@@ -1,6 +1,13 @@
 body {
 	font: 12pt "Courier New";
+	padding: 0px;
+	text-align: center;
+}
+
+#centre {
 	width: 823px;
+	margin: 0px auto;
+	text-align: left;
 }
 
 textarea {
