@@ -41,9 +41,8 @@ function changeBg(a) {
 </ul>
 <div style="border-bottom:1px dotted black;"></div><br />
 <span style="font-weight: 700; font-size: 14pt;">About Community Service Hours:</span>
-<p>Writing meaningful and creative problems earns you community service hours! We will need to select 250 problems for the five competitions so there will be plenty of opportunities for your problems to be picked! The number of hours you get will be determined by the following formula: 
-<pre>round(#problems_that_get_selected/12)</pre>
-You can see how much you have contributed <a href="rank">here</a>.</p><br /><br />
+<p>Writing meaningful and creative problems earns you community service hours! We will need to select 250 problems for the five competitions so there will be plenty of opportunities for your problems to be picked! The number of hours you get is the integer closest to the number of problems you submitted divided by 12.
+You can see how much you have contributed <a href="rank">here</a>.</p>
 <div style="border-bottom:1px dotted black;"></div><br />
 <?php
 // get # problems

@@ -5,8 +5,31 @@ Thanks to Union College for jsMath.
 Thanks to Carnegie Mellon for reCAPTCHA.
 -->
 <?php
-$submitted = -1;
-if(!isset($_POST["go"])) {
+$xml = simplexml_load_file('leprobs.xml');
+
+if(isset($_POST["go"])) {
+	$a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
+	$a = str_ireplace("\\\\", "\\", $a);
+	$answer = str_ireplace("\\\\", "\\", trim(htmlspecialchars($_POST["answer"])));
+	$author = trim(htmlspecialchars($_POST["author"]));
+	$age = $_POST["agegroup"];
+
+	// BEGIN validate fields
+	if($answer == "") die("You forgot to include the answer!<br /><a href=\"master.php\">Try again</a>");
+	if($author == "") die("You forgot to put your name!<br /><a href=\"master.php\">Try again</a>");
+	if($a == "") die("You didn't submit a problem!<br />".'<a href="master.php">Try again</a>');
+	if($age != "old" && $age != "young") die("You didn't select an age group!<br /><a href=\"master.php\">Try again</a>");
+	// END validate fields
+
+	$newProb = $xml->addChild('problem');
+	$newProb->addChild('author', $author);
+	$newProb->addChild('text', $a);
+	$newProb->addChild('answer', $answer);
+	$newProb->addChild('grade', $age);
+	$newProb->addChild('rating', 0);
+	file_put_contents('leprobs.xml', $xml->asXML());
+	echo 'Thanks for your submission!<br /><a href="master.php">Back</a>';
+}
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -38,34 +61,26 @@ function changeBg(a) {
 <?php
 
 // get # problems
-$arr = explode("<problem>", file_get_contents("leprobs.xml"));
-echo "FYI: There are <span style=\"font-weight:600;\">".(count($arr) - 1)."</span> problems in the database.";
-//echo "<br />Now viewing: <span id=\"viewing\">All</span> problems<br />\n";
+echo "FYI: There are <span style=\"font-weight:600;\">".count($xml)."</span> problems in the database.\n";
 
-function contents($parser, $data){ 
-	echo trim(htmlspecialchars($data)); 
+//=====================================================
+
+$i = 0;
+foreach($xml as $value) {
+	echo '<p class="prob">';
+	echo "$value->author wrote: <br />$value->text<br />";
+	echo "Answer: $value->answer<br />";
+	echo "Category: $value->grade<br />";
+	echo "Rating: $value->rating";
+	echo '<form name="rate'.$i.'" method="post" action="rate.php">';
+	echo '<input type="hidden" name="formname" value="'.$i.'" />';
+	echo '<input type="submit" name="up" value="+" />&nbsp;';
+	echo '<input type="submit" name="down" value="-" />';
+	echo "</form></p>\n";
+	$i++;
 }
 
-function startTag($parser, $data){ 
-	if($data == "PROBLEM") echo "<p class=\"prob\">\n";
-	else if($data == "TEXT") echo " wrote:<br />";
-	else if($data == "ANSWER") echo "<br />Answer: ";
-	else if($data == "GRADE") echo "<br />Category: ";
-} 
-
-function endTag($parser, $data){ 
-	if($data == "PROBLEM") echo "\n</p>\n";
-} 
-
-$file = "leprobs.xml";
-$allProbs = xml_parser_create(); 
-xml_set_element_handler($allProbs, "startTag", "endTag"); 
-xml_set_character_data_handler($allProbs, "contents"); 
-$fp = fopen($file, "r"); 
-$data = fread($fp, 80000); 
-if(!(xml_parse($allProbs, $data, feof($fp))))die("Error on line ".xml_get_current_line_number($allProbs));
-xml_parser_free($allProbs); 
-fclose($fp);
+//======================================================
 ?>
 
 <form name="submission" method="post" action="<?php echo $PHP_SELF; ?>">
@@ -87,24 +102,6 @@ Select the appropriate grade level for your problem:<br />
 </p>
 <input type="submit" value="Submit" name="go" />
 </form>
-<?php
-} else {
-	$a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
-	$a = str_ireplace("\\\\", "\\", $a);
-	$answer = str_ireplace("\\\\", "\\", trim(htmlspecialchars($_POST["answer"])));
-	$age = $_POST["agegroup"];
-	$author = trim(htmlspecialchars($_POST["author"]));
-	if($answer == "") die("You forgot to include the answer!<br /><a href=\"master.php\">Try again</a>");
-	if($author == "") die("You forgot to put your name!<br /><a href=\"master.php\">Try again</a>");
-	if($a == "") die("You didn't submit a problem!<br /><a href=\"master.php\">Try again</a>");
-	if($age != "young" && $age != "old") die("You didn't select an age group!<br /><a href=\"master.php\">Try again</a>");
-	$tmp = file_get_contents("leprobs.xml");
-	$tmp = str_replace("</db>", "", $tmp);
-	file_put_contents("leprobs.xml", $tmp);
-	file_put_contents("leprobs.xml", "<problem>\n\t<author>".$author."</author>\n\t<text>".$a."</text>\n\t<answer>".$answer."</answer>\n\t<grade>".$age."</grade>\n</problem>\n</db>\n", FILE_APPEND);
-	echo "Thanks for your submission!<br /><a href=\"master.php\">Back</a>";
-}
-?>
 </div>
 </body>
 </html>

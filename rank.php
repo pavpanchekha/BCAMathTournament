@@ -31,7 +31,9 @@ echo "If your name is bolded, then you've written ".$probs." or more problems an
 foreach($arr as $key => $val) {
 	if($val >=$probs && $key != "Sherry Wu") echo "<span style=\"font-weight:700;\">";
 	else if($key == "Sherry Wu") echo "<span style=\"font-style:italic;\">";
-	echo "<li>$key ($val)</li>\n";
+	echo "<li>$key";
+	if($key == "Sherry Wu") echo " (Student Coordinator)";
+	echo " ($val)</li>\n";
 	if($val >=$probs) echo "</span>";
 }
 echo "</ol>";
