@@ -27,14 +27,15 @@ while($tok !== false) {
 	$isabsent = 1;
 }
 arsort($arr);
-echo "If your name is bolded, then you've written ".$probs." or more problems and may qualify as a problem editor!<ol>";
+echo "If your name is bolded, then you have written $probs or more problems and may qualify as a problem editor!<ol>\n";
 foreach($arr as $key => $val) {
 	if($val >=$probs && $key != "Sherry Wu") echo "<span style=\"font-weight:700;\">";
 	else if($key == "Sherry Wu") echo "<span style=\"font-style:italic;\">";
 	echo "<li>$key";
 	if($key == "Sherry Wu") echo " (Student Coordinator)";
-	echo " ($val)</li>\n";
+	echo " ($val)</li>";
 	if($val >=$probs) echo "</span>";
+	echo "\n";
 }
 echo "</ol>";
 ?>

@@ -51,19 +51,10 @@ function changeBg(a) {
 <body>
 <div id="centre">
 <h2>BCA Math Competition Problem Submission Site</h2>
-<!-- toolbar
-<div style="float:right;">
-	See:&nbsp;<a href="javascript:changeView(0)">All</a>&nbsp;•
-	<a href="javascript:changeView(1)">4,5,6</a>&nbsp;•
-	<a href="javascript:changeView(2)">7,8</a>
-</div>
--->
 <?php
 
 // get # problems
 echo "FYI: There are <span style=\"font-weight:600;\">".count($xml)."</span> problems in the database.\n";
-
-//=====================================================
 
 $i = 0;
 foreach($xml as $value) {
@@ -79,13 +70,11 @@ foreach($xml as $value) {
 	echo "</form></p>\n";
 	$i++;
 }
-
-//======================================================
 ?>
 
 <form name="submission" method="post" action="<?php echo $PHP_SELF; ?>">
 <h3>Enter a Problem:</h3>
-<p>Use <code>\(\backslash( latex \backslash)\)</code> for inline latex and <code>\(\backslash[ latex \backslash]\)</code> for out-of-line latex.</p>
+<p>Use <code>\(\backslash( latex \backslash)\)</code> for inline LaTeX and <code>\(\backslash[ latex \backslash]\)</code> for out-of-line LaTeX.</p>
 <p>Type your name in the text box to the right: <input type="text" name="author" /></p>
 <textarea rows="5" 
 			cols="80" 
