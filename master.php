@@ -27,7 +27,15 @@ if(isset($_POST["go"])) {
 	$newProb->addChild('answer', $answer);
 	$newProb->addChild('grade', $age);
 	$newProb->addChild('rating', 0);
-	file_put_contents('leprobs.xml', $xml->asXML());
+	file_put_contents('leprobs.back.xml', file_get_contents('leprobs.xml'));
+	
+	// BEGIN format xml
+	$dom = new DOMDocument('1.0');
+	$dom->preserveWhiteSpace = false;
+	$dom->formatOutput = true;
+	$dom->loadXML($xml->asXML());
+	file_put_contents('leprobs.xml', $dom->saveXML());
+	// END format xml
 	echo 'Thanks for your submission!<br /><a href="master.php">Back</a>';
 }
 ?>
