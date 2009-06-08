@@ -6,7 +6,6 @@ Thanks to Carnegie Mellon for reCAPTCHA.
 -->
 <?php
 $xml = simplexml_load_file('leprobs.xml');
-
 if(isset($_POST["go"])) {
 	$a = str_ireplace("\n", "", trim(htmlspecialchars($_POST["space"])));
 	$a = str_ireplace("\\\\", "\\", $a);
@@ -38,6 +37,13 @@ if(isset($_POST["go"])) {
 	// END format xml
 	echo 'Thanks for your submission!<br /><a href="master.php">Back</a>';
 }
+if(isset($_POST["prev"])) {
+	$startprob = ($_REQUEST["start_prob"]-50<=0)?0:($_REQUEST["start_prob"]-50);
+}
+else if(isset($_POST["next"])) {
+	$startprob = ($_REQUEST["start_prob"]+50>=count($xml))?$_REQUEST["start_prob"]:($_POST["start_prob"]+50);
+}
+else $startprob = 0;
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -63,22 +69,30 @@ function changeBg(a) {
 
 // get # problems
 echo "FYI: There are <span style=\"font-weight:600;\">".count($xml)."</span> problems in the database.\n";
-
+echo '<p>Showing problems '.($startprob+1).' to '.(($startprob+50>count($xml))?count($xml):$startprob+50).'.</p>';
 $i = 0;
-foreach($xml as $value) {
-	echo '<p class="prob">';
-	echo "$value->author wrote: <br />$value->text<br />";
-	echo "Answer: $value->answer<br />";
-	echo "Category: $value->grade<br />";
-	echo "Rating: $value->rating";
+//foreach($xml as $value) {
+for($i = $startprob; $i < (($startprob+50>count($xml))?count($xml):$startprob+50); $i++) {
+	echo '<p class="'.(($i%2==0)?"even":"odd").'">';
+	echo $xml->problem[$i]->author." wrote: <br />".$xml->problem[$i]->text."<br />";
+	echo "Answer: ".$xml->problem[$i]->answer."<br />";
+	echo "Category: ".$xml->problem[$i]->grade."<br />";
+	echo "Rating: ".$xml->problem[$i]->rating;
 	echo '<form name="rate'.$i.'" method="post" action="rate.php">';
 	echo '<input type="hidden" name="formname" value="'.$i.'" />';
 	echo '<input type="submit" name="up" value="+" />&nbsp;';
 	echo '<input type="submit" name="down" value="-" />';
 	echo "</form></p>\n";
-	$i++;
+//	$i++;
 }
 ?>
+<p>Navigation: 
+<form name="nav" method="post" action="<?php echo $PHP_SELF; ?>">
+<input type="hidden" name="start_prob" value="<?php echo $startprob; ?>" />
+<input type="submit" value="Previous" name="prev" />
+<input type="submit" value="Next" name="next" />
+</form>
+</p>
 
 <form name="submission" method="post" action="<?php echo $PHP_SELF; ?>">
 <h3>Enter a Problem:</h3>

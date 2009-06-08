@@ -19,3 +19,15 @@ p.prob {
 	padding: 5px;
 	background: #F0F8FF;
 }
+
+p.even {
+	border: thin dashed black;
+	padding: 5px;
+	background: #F0FFF0; // honeydew
+}
+
+p.odd {
+	border: thin dashed black;
+	padding: 5px;
+	background: #F0F8FF; // alice blue
+}
